@@ -2,7 +2,6 @@
 , lib
 , buildPythonPackage
 , fetchFromGitHub
-, fetchpatch
 , pythonAtLeast
 , pythonOlder
 , pytestCheckHook
@@ -19,7 +18,7 @@
 
 buildPythonPackage rec {
   pname = "accelerate";
-  version = "0.21.0";
+  version = "0.23.0";
   format = "pyproject";
   disabled = pythonOlder "3.7";
 
@@ -27,17 +26,8 @@ buildPythonPackage rec {
     owner = "huggingface";
     repo = pname;
     rev = "refs/tags/v${version}";
-    hash = "sha256-BwM3gyNhsRkxtxLNrycUGwBmXf8eq/7b56/ykMryt5w=";
+    hash = "sha256-pFkEgE1NGLPBW1CeGU0RJr+1Nj/y58ZcljyOnJuR47A=";
   };
-
-  patches = [
-    # fix import error when torch>=2.0.1 and torch.distributed is disabled
-    # https://github.com/huggingface/accelerate/pull/1800
-    (fetchpatch {
-      url = "https://github.com/huggingface/accelerate/commit/32701039d302d3875c50c35ab3e76c467755eae9.patch";
-      hash = "sha256-Hth7qyOfx1sC8UaRdbYTnyRXD/VRKf41GtLc0ee1t2I=";
-    })
-  ];
 
   nativeBuildInputs = [ setuptools ];
 
