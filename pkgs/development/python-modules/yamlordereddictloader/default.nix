@@ -1,19 +1,27 @@
 { lib
 , buildPythonPackage
 , fetchPypi
+, setuptools
 , pyyaml
 }:
 
 buildPythonPackage rec {
   pname = "yamlordereddictloader";
-  version = "0.4.0";
+  version = "0.4.2";
+  format = "pyproject";
 
   src = fetchPypi {
     inherit pname version;
-    sha256 = "03h8wa6pzqjiw25s3jv9gydn77gs444mf31lrgvpgy53kswz0c3z";
+    hash = "sha256-Nq8vYhD8/12k/EwS4dgV+XPc60EETnleHwYRXWNLyhM=";
   };
 
-  propagatedBuildInputs = [ pyyaml ];
+  nativeBuildInputs = [
+    setuptools
+  ];
+
+  propagatedBuildInputs = [
+    pyyaml
+  ];
 
   # no tests
   doCheck = false;
