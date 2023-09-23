@@ -250,6 +250,17 @@ let
         doCheck = false;
       });
 
+      syrupy = super.syrupy.overridePythonAttrs (oldAttrs: rec {
+        version = "4.2.1";
+        src = fetchFromGitHub {
+          owner = "tophat";
+          repo = "syrupy";
+          rev = "refs/tags/v${version}";
+          hash = "sha256-MXUuLw4+J/9JtXY1DYwBjj2sgAbO2cXQi1HnVRx3BhM=";
+        };
+        doCheck = false;
+      });
+
       # Pinned due to API changes in 0.3.0
       tailscale = super.tailscale.overridePythonAttrs (oldAttrs: rec {
         version = "0.2.0";
